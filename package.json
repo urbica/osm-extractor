@@ -1,0 +1,56 @@
+{
+  "name": "osm-extractor",
+  "description": "Extracts data from OpenStreetMap",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [
+    "osm",
+    "openstreetmap",
+    "extracts",
+    "nominatim"
+  ],
+  "author": "Stepan Kuzmin <to.stepan.kuzmin@gmail.com> (stepankuzmin.ru)",
+  "homepage": "https://github.com/stepankuzmin/osm-extractor",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stepankuzmin/osm-extractor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stepankuzmin/osm-extractor/issues"
+  },
+  "license": "MIT",
+  "scripts": {
+    "cz": "git-cz",
+    "lint": "eslint .",
+    "precommit": "lint-staged",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier-eslint --write",
+      "yarn lint",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "commitizen": "^2.10.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-plugin-import": "^2.14.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "prettier": "^1.14.2",
+    "prettier-eslint": "^8.8.2",
+    "prettier-eslint-cli": "^4.7.1"
+  }
+}
