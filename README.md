@@ -77,7 +77,7 @@ const {
 geocodeWithNominatim("Moscow")
   .then(results => {
     const query = buildOverpassAreaQuery(results[0]);
-    return extractWithOverpassQuery(bbox);
+    return extractWithOverpassQuery(query);
   })
   .then(data => data.pipe(fs.createWriteStream("data.osm")));
 ```
