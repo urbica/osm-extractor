@@ -10,6 +10,19 @@ npm i osm-extractor
 
 ## Usage
 
+tl;dr -- Geocode and extract area using [Overpass API](https://overpass-turbo.eu/)
+
+```js
+const fs = require("fs");
+const { geocodeAndExtract } = require("osm-extractor");
+
+geocodeAndExtract("Liechtenstein").then(data =>
+  data.pipe(fs.createWriteStream("data.osm"))
+);
+```
+
+### More examples:
+
 Extract from OpenStreetMap using [BBox](https://wiki.openstreetmap.org/wiki/Bounding_Box)
 
 ```js

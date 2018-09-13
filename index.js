@@ -44,7 +44,13 @@ const extractWithOverpassQuery = (query, options = {}) =>
     })
     .then(response => response.data);
 
+const geocodeAndExtract = query =>
+  geocodeWithNominatim(query).then(results =>
+    extractWithOverpassQuery(buildOverpassAreaQuery(results[0]))
+  );
+
 module.exports = {
+  geocodeAndExtract,
   geocodeWithNominatim,
   nominatimBBoxToOSM,
   buildOverpassAreaQuery,
