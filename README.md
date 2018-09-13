@@ -1,5 +1,7 @@
 # osm-extractor
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/stepankuzmin/osm-extractor.svg)](https://greenkeeper.io/)
+
 Extracts data from [OpenStreetMap](https://www.openstreetmap.org)
 
 ## Installation
