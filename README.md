@@ -10,7 +10,7 @@ npm i osm-extractor
 
 ## Usage
 
-tl;dr -- Geocode and extract area using [Overpass API](https://overpass-turbo.eu/)
+**tl;dr** — geocode and extract area using [Overpass API](https://overpass-turbo.eu/)
 
 ```js
 const fs = require("fs");
