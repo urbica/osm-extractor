@@ -1,8 +1,8 @@
 const test = require('tape');
 const moxios = require('moxios');
-const { geocodeWithNominatim } = require('./index');
+const { geocode } = require('./index');
 
-test('geocodeWithNominatim', (t) => {
+test('geocode', (t) => {
   moxios.install();
 
   const nominatimResponse = [];
@@ -11,7 +11,7 @@ test('geocodeWithNominatim', (t) => {
     responseText: nominatimResponse
   });
 
-  geocodeWithNominatim('Moscow').then((results) => {
+  geocode('Moscow').then((results) => {
     t.deepEqual(results, nominatimResponse);
     moxios.uninstall();
     t.end();

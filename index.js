@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const geocodeWithNominatim = (query, options = {}) =>
+const geocode = (query, options = {}) =>
   axios
     .get(options.url || 'https://nominatim.openstreetmap.org/search', {
       params: { q: query, format: options.format || 'json' }
@@ -17,26 +17,22 @@ const normalizeNominatimId = (result) => {
   return areaRef;
 };
 
-const buildOverpassAreaQuery = nominatimResult =>
+const buildAreaQuery = nominatimResult =>
   [
     `area(${normalizeNominatimId(nominatimResult)})->.searchArea;`,
     '(node(area.searchArea); way(area.searchArea); relation(area.searchArea););',
     'out body; >; out skel qt;'
   ].join('');
 
-// bbox = [left, bottom, right, top]
-const extractWithBBox = (bbox, options = {}) =>
-  new Promise((resolve, reject) =>
-    axios
-      .get(options.url || 'https://api.openstreetmap.org/api/0.6/map', {
-        responseType: 'stream',
-        params: { bbox: bbox.join(',') }
-      })
-      .then(response => resolve(response.data))
-      .catch(({ response }) => reject(new Error(response.headers.error)))
-  );
+const buildBBoxQuery = (bbox) => {
+  const bboxStr = bbox.join(',');
+  return [
+    `(node(${bboxStr}); way(${bboxStr}); relation(${bboxStr}););`,
+    'out body; >; out skel qt;'
+  ].join('');
+};
 
-const extractWithOverpassQuery = (query, options = {}) =>
+const extractWithQuery = (query, options = {}) =>
   axios
     .get(options.url || 'https://overpass-api.de/api/interpreter', {
       responseType: options.responseType || 'stream',
@@ -44,16 +40,17 @@ const extractWithOverpassQuery = (query, options = {}) =>
     })
     .then(response => response.data);
 
-const geocodeAndExtract = query =>
-  geocodeWithNominatim(query).then(results =>
-    extractWithOverpassQuery(buildOverpassAreaQuery(results[0]))
-  );
+const extractWithBBox = bbox => extractWithQuery(buildBBoxQuery(bbox));
+
+const extractWithGeocode = query =>
+  geocode(query).then(results => extractWithQuery(buildAreaQuery(results[0])));
 
 module.exports = {
-  geocodeAndExtract,
-  geocodeWithNominatim,
+  geocode,
   nominatimBBoxToOSM,
-  buildOverpassAreaQuery,
+  buildAreaQuery,
+  buildBBoxQuery,
+  extractWithQuery,
   extractWithBBox,
-  extractWithOverpassQuery
+  extractWithGeocode
 };
