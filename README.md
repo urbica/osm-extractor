@@ -1,6 +1,10 @@
 # osm-extractor
 
-Extracts data from [OpenStreetMap](https://www.openstreetmap.org)
+[![Build Status](https://travis-ci.org/urbica/osm-extractor.svg?branch=master)](https://travis-ci.org/urbica/osm-extractor)
+
+Extracts data from [OpenStreetMap](https://www.openstreetmap.org) using [Overpass API](https://overpass-turbo.eu/).
+
+<img align="center" src="https://raw.githubusercontent.com/urbica/osm-extractor/master/Overpass_API.png" />
 
 ## Installation
 
