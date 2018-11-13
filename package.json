@@ -22,7 +22,6 @@
   "scripts": {
     "cz": "git-cz",
     "lint": "eslint .",
-    "precommit": "lint-staged",
     "test": "node index.test.js"
   },
   "config": {
@@ -54,5 +53,10 @@
     "prettier-eslint": "^8.8.2",
     "prettier-eslint-cli": "^4.7.1",
     "tape": "^4.9.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
